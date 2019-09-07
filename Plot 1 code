@@ -1,0 +1,25 @@
+getwd()
+setwd("C:/Users/ifreitesasencion/Documents/R/training/Certification_course1/Exploratory data analysis")
+
+
+# read the data set 
+data <- read.csv("household_power_consumption.txt", header=T, sep=';', na.strings="?", 
+                      nrows=2075259, check.names=F, stringsAsFactors=F, comment.char="", quote='\"')
+
+# We will only be using data from the dates 2007-02-01 and 2007-02-02. I fsubset the data for the given range period.
+# 
+data_filtered <- subset(data, Date %in% c("1/2/2007","2/2/2007"))
+data_filtered$Date <- as.Date(data_filtered$Date, format="%d/%m/%Y")
+# to read the variable names
+head(data_filtered,0)
+
+# Plot 1
+# With the code below, I reproduce plot 1 as provided. The chart simply shows how household energy usage varies over a 2-day period in February, 2007. 
+
+plot1<- hist(data_filtered$Global_active_power, main="Global Active Power", 
+     xlab="Global Active Power (kilowatts)", ylab="Frequency", col="Red")
+
+plot1
+
+png("plot1.png", width=480, height=480)
+dev.off()
